@@ -3,7 +3,8 @@
 {-# SCRIPT_TYPE ACCOUNT #-}
 
 let tf = sigVerify(tx.bodyBytes, tx.proofs[0], tx.senderPublicKey)
-let additionalData = size(tx.proofs) == 3 && isDefined(tx.proofs[1]) && isDefined(tx.proofs[2])
+# in real world additional data must verify second signature
+let additionalData = size(tx.proofs) >= 3 && toUtf8String(tx.proofs[1]) == "hash" && toUtf8String(tx.proofs[2]) == "sign"
 let result = tf && additionalData
 
 if (result) then

@@ -44,7 +44,7 @@ if __name__ == '__main__':
     # due to built-in function 'balance' use pywaves instead of self.pywaves
     pywaves.setNode(node='https://nodes-testnet.wavesnodes.com', chain='testnet', chain_id='T')
 
-    seedSender = "welcome text doctor auto chase sword edge head guilt gossip begin bunker burden deer history"
+    seedSender = "trade latin maximum slot unfair segment outside holiday park monster choose leader all object poet"
     addressSender = pywaves.Address(seed=seedSender, pywaves=PyWaves2Sig())
 
     seedRecipient = "detail grow legend inherit ridge happy bird element milk thank neutral ecology gun beach burger"
