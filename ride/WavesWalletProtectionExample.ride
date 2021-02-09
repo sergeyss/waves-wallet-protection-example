@@ -6,8 +6,7 @@ let tf = sigVerify(tx.bodyBytes, tx.proofs[0], tx.senderPublicKey)
 let additionalData = size(tx.proofs) == 3 && isDefined(tx.proofs[1]) && isDefined(tx.proofs[2])
 let result = tf && additionalData
 
-if (result) {
+if (result) then
     true
-} else {
+else
     throw("second sign is required")
-}
