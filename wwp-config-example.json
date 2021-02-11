@@ -1,0 +1,6 @@
+{
+  "node": "https://nodes-testnet.wavesnodes.com",
+  "chain": "testnet",
+  "chainId": "T",
+  "seed": "second signature seed"
+}
