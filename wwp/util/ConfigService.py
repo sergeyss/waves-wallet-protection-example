@@ -2,9 +2,7 @@ import json
 import os
 import logging
 from pathlib import Path
-
 from pywaves import Address
-
 from wwp.util.SingletonWrapper import singleton
 
 
@@ -28,8 +26,8 @@ class ConfigService:
                     jsonConfig = json.load(configFile)
 
                 self.__node = jsonConfig.get('node', 'https://nodes.wavesnodes.com').strip()
-                self.__chain = jsonConfig('chain', 'mainnet').strip()
-                self.__chainId = jsonConfig('chainId', 'W').strip()
+                self.__chain = jsonConfig.get('chain', 'mainnet').strip()
+                self.__chainId = jsonConfig.get('chainId', 'W').strip()
                 self.__generateKeyPair(jsonConfig['seed'])
                 return
 
