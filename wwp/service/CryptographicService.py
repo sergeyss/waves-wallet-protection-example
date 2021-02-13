@@ -1,5 +1,4 @@
 import os
-
 import base58
 import pywaves.crypto as crypto
 
