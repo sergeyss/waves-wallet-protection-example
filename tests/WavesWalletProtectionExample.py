@@ -3,7 +3,8 @@ import requests
 import base58
 import json
 
-from wwp.util.ConfigService import ConfigService
+from wwp.service.ConfigService import ConfigService
+from wwp.service.CryptographicService import CryptographicService
 
 
 class PyWaves2Sig(pywaves.ParallelPyWaves):
@@ -49,6 +50,9 @@ if __name__ == '__main__':
     print("node: %s" % configService.node)
     print("chain: %s" % configService.chain)
     print("chainId: %s" % configService.chainId)
+
+    cryptographicService = CryptographicService()
+    print("message: %s\nsignature: %s" % cryptographicService.signRandomMessage())
 
     # due to built-in function 'balance' use pywaves instead of self.pywaves
     # pywaves.setNode(node='https://nodes-testnet.wavesnodes.com', chain='testnet', chain_id='T')
