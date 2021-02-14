@@ -1,4 +1,5 @@
 import os
+
 import base58
 import pywaves.crypto as crypto
 
@@ -20,6 +21,6 @@ class CryptographicService:
         Signs random message.
         :return: message and its signature (bytes)
         """
-        message = os.urandom(64)
-        signature = crypto.sign(self.__configService.privateKey, message)
-        return base58.b58encode(message), signature
+        message = os.urandom(16).hex()
+        signature = crypto.sign(self.__configService.privateKey, message.encode())
+        return base58.b58encode(message.encode()), signature

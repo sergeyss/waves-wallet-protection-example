@@ -31,7 +31,7 @@ class PyWaves2Sig(pywaves.ParallelPyWaves):
         if postData:
             postData = self.__appendSecondSign(postData)
 
-        return super().wrapper(self, api, postData, host, headers)
+        return super().wrapper(api, postData, host, headers)
 
     def __appendSecondSign(self, postData: str) -> str:
         data = json.loads(postData)

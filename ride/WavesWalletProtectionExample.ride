@@ -2,12 +2,7 @@
 {-# CONTENT_TYPE EXPRESSION #-}
 {-# SCRIPT_TYPE ACCOUNT #-}
 
-let tf = sigVerify(tx.bodyBytes, tx.proofs[0], tx.senderPublicKey)
-# in real world additional data must verify second signature
-let additionalData = size(tx.proofs) >= 3 && toUtf8String(tx.proofs[1]) == "hash" && toUtf8String(tx.proofs[2]) == "sign"
-let result = tf && additionalData
-
-if (result) then
-    true
-else
-    throw("second sign is required")
+let secPublicKey = base58'2PNDHFzF3iRRcLfRd7g4J3DXqhNrDQ6eSuAbpwwPZsnC'
+let txSig = sigVerify(tx.bodyBytes, tx.proofs[0], tx.senderPublicKey)
+let secSig = sigVerify(tx.proofs[1], tx.proofs[2], secPublicKey)
+txSig && secSig
