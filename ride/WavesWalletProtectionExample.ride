@@ -3,6 +3,24 @@
 {-# SCRIPT_TYPE ACCOUNT #-}
 
 let secPublicKey = base58'2PNDHFzF3iRRcLfRd7g4J3DXqhNrDQ6eSuAbpwwPZsnC'
-let txSig = sigVerify(tx.bodyBytes, tx.proofs[0], tx.senderPublicKey)
-let secSig = sigVerify(tx.proofs[1], tx.proofs[2], secPublicKey)
-txSig && secSig
+let withdraw = [addressFromString("3NCyS63RHgNBTTzZSCneiZEbp4sG2xtmeBE"),
+                addressFromString("3N78XpUJ1VjSmsPr3vMKdPEEo6fRE7NyBJF")]
+let errorMsg = "transaction is not permitted"
+let ethId = base58'BrmjyAWT5jjr3Wpsiyivyvg5vDuzoX2s93WgiexXetB3' # base58'474jTeYx2r2Va35794tCScAXWJG9hU2HcgxzMowaZUnu' - mainnet
+
+match tx {
+    case o: Order =>
+        if !isDefined(o.assetPair.priceAsset) && o.assetPair.amountAsset == ethId then
+            sigVerify(tx.proofs[1], tx.proofs[2], secPublicKey) && sigVerify(tx.bodyBytes, tx.proofs[0], tx.senderPublicKey)
+        else
+            throw(errorMsg)
+
+    case t: TransferTransaction =>
+        if t.sender == this && containsElement(withdraw, t.recipient) then
+            sigVerify(tx.proofs[1], tx.proofs[2], secPublicKey) && sigVerify(tx.bodyBytes, tx.proofs[0], tx.senderPublicKey)
+        else
+            throw(errorMsg)
+
+    case _ =>
+        throw(errorMsg)
+}

@@ -14,14 +14,26 @@ print("chainId: %s" % configService.chainId)
 cryptographicService = CryptographicService()
 print("message: %s\nsignature: %s" % cryptographicService.signRandomMessage())
 
-# due to built-in function 'balance' use pywaves instead of self.pywaves
-# pywaves.setNode(node='https://nodes-testnet.wavesnodes.com', chain='testnet', chain_id='T')
-
-seedSender = "drill opinion vendor love blossom fetch tank oval route split nature sound trick deposit weekend"
+seedSender = "attack limb pattern gentle pretty chef enough brush pact piece beef team tone silver response"
 addressSender = pywaves.Address(seed=seedSender, pywaves=PyWaves2Sig())
 
-seedRecipient = "detail grow legend inherit ridge happy bird element milk thank neutral ecology gun beach burger"
-# in real world the only address is known. This is done to avoid the difficulty of getting an address
-addressRecipient = pywaves.Address(seed=seedRecipient)
+withdrawAddress = "3NCyS63RHgNBTTzZSCneiZEbp4sG2xtmeBE"
+addressRecipient = pywaves.Address(address=withdrawAddress)
+response = addressSender.sendWaves(addressRecipient,
+                                   1110000,
+                                   txFee=pywaves.DEFAULT_SMART_FEE + pywaves.DEFAULT_BASE_FEE)
+print("recipient address: %s\nresponse:\n%s" % (withdrawAddress, response))
 
-addressSender.sendWaves(addressRecipient, 1100000, txFee=pywaves.DEFAULT_SMART_FEE + pywaves.DEFAULT_BASE_FEE)
+withdrawAddress = "3N78XpUJ1VjSmsPr3vMKdPEEo6fRE7NyBJF"
+addressRecipient = pywaves.Address(address=withdrawAddress)
+response = addressSender.sendWaves(addressRecipient,
+                                   1120000,
+                                   txFee=pywaves.DEFAULT_SMART_FEE + pywaves.DEFAULT_BASE_FEE)
+print("recipient address: %s\nresponse:\n%s" % (withdrawAddress, response))
+
+withdrawAddress = "3NCjREHB7dUFCzPhdy9g8oWhJy4YQyPaGmv"
+addressRecipient = pywaves.Address(address=withdrawAddress)
+response = addressSender.sendWaves(addressRecipient,
+                                   1130000,
+                                   txFee=pywaves.DEFAULT_SMART_FEE + pywaves.DEFAULT_BASE_FEE)
+print("recipient address: %s\nresponse:\n%s" % (withdrawAddress, response))
