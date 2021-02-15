@@ -14,7 +14,7 @@ print("chainId: %s" % configService.chainId)
 cryptographicService = CryptographicService()
 print("message: %s\nsignature: %s" % cryptographicService.signRandomMessage())
 
-seedSender = "attack limb pattern gentle pretty chef enough brush pact piece beef team tone silver response"
+seedSender = "road effort twist shield sugar song item garbage mosquito child wasp room loop someone veteran"
 addressSender = pywaves.Address(seed=seedSender, pywaves=PyWaves2Sig())
 
 withdrawAddress = "3NCyS63RHgNBTTzZSCneiZEbp4sG2xtmeBE"

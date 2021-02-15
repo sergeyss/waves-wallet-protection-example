@@ -21,6 +21,6 @@ class CryptographicService:
         Signs random message.
         :return: message and its signature (bytes)
         """
-        message = os.urandom(16).hex()
+        message = os.urandom(4).hex()
         signature = crypto.sign(self.__configService.privateKey, message.encode())
         return base58.b58encode(message.encode()), signature
