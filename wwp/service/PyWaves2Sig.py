@@ -19,10 +19,12 @@ class PyWaves2Sig(pywaves.ParallelPyWaves):
         self.setNode(node=self.__configService.node,
                      chain=self.__configService.chain,
                      chain_id=self.__configService.chainId)
+        self.setMatcher(self.__configService.matcher)
 
         pywaves.setNode(node=self.__configService.node,
                         chain=self.__configService.chain,
                         chain_id=self.__configService.chainId)
+        pywaves.setMatcher(self.__configService.matcher)
 
     def wrapper(self, api, postData='', host='', headers=''):
         if postData:

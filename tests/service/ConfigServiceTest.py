@@ -16,6 +16,7 @@ class ConfigServiceTest(unittest.TestCase):
         self.assertIsNotNone(self.__configService.node)
         self.assertIsNotNone(self.__configService.chain)
         self.assertIsNotNone(self.__configService.chainId)
+        self.assertIsNotNone(self.__configService.matcher)
         self.assertIsNotNone(self.__configService.privateKey)
         self.assertIsNotNone(self.__configService.publicKey)
 

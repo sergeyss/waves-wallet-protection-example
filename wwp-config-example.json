@@ -2,5 +2,6 @@
   "node": "https://nodes-testnet.wavesnodes.com",
   "chain": "testnet",
   "chainId": "T",
+  "matcher": "https://matcher-testnet.waves.exchange",
   "seed": "second signature seed"
 }

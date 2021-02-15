@@ -2,7 +2,7 @@ import json
 import os
 import logging
 from pathlib import Path
-from pywaves import Address
+from pywaves import Address, pywaves
 from wwp.util.SingletonWrapper import singleton
 
 
@@ -25,9 +25,10 @@ class ConfigService:
                 with open(cf) as configFile:
                     jsonConfig = json.load(configFile)
 
-                self.__node = jsonConfig.get('node', 'https://nodes.wavesnodes.com').strip()
-                self.__chain = jsonConfig.get('chain', 'mainnet').strip()
-                self.__chainId = jsonConfig.get('chainId', 'W').strip()
+                self.__node = jsonConfig.get('node', pywaves.NODE).strip()
+                self.__chain = jsonConfig.get('chain', pywaves.CHAIN).strip()
+                self.__chainId = jsonConfig.get('chainId', pywaves.CHAIN_ID).strip()
+                self.__matcher = jsonConfig.get('matcher', pywaves.MATCHER).strip()
                 self.__generateKeyPair(jsonConfig['seed'])
                 return
 
@@ -54,6 +55,14 @@ class ConfigService:
         :return: chainId.
         """
         return self.__chainId
+
+    @property
+    def matcher(self) -> str:
+        """
+        Returns matcher.
+        :return: matcher.
+        """
+        return self.__matcher
 
     @property
     def publicKey(self) -> str:
