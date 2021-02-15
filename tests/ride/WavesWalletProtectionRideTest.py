@@ -38,3 +38,20 @@ class WavesWalletProtectionRideTest(unittest.TestCase):
         response = ownerAddress.sendWaves(arbitraryAddress, WAVES_AMOUNT, txFee=SMART_CONTRACT_TX_FEE)
         self.assertIsNotNone(response['error'])
         self.assertTrue(SMART_CONTRACT_THROW_MESSAGE in response['message'])
+
+    def test002TransferWithin2Sig(self):
+        ownerAddress = pywaves.Address(seed=OWNER_SEED, pywaves=self.__pyWaves2Sig)
+        for recipient in [WITHDRAW1_ADDRESS, WITHDRAW2_ADDRESS]:
+            recipientAddress = pywaves.Address(address=recipient)
+            response = ownerAddress.sendWaves(recipientAddress, WAVES_AMOUNT, txFee=SMART_CONTRACT_TX_FEE)
+            self.assertIsNone(response.get('error'))
+
+        recipientAddress = pywaves.Address(address=RESTRICTED_ADDRESS)
+        response = ownerAddress.sendWaves(recipientAddress, WAVES_AMOUNT, txFee=SMART_CONTRACT_TX_FEE)
+        self.assertIsNotNone(response['error'])
+        self.assertTrue(SMART_CONTRACT_THROW_MESSAGE in response['message'])
+
+        arbitraryAddress = pywaves.Address(privateKey=None)
+        response = ownerAddress.sendWaves(arbitraryAddress, WAVES_AMOUNT, txFee=SMART_CONTRACT_TX_FEE)
+        self.assertIsNotNone(response['error'])
+        self.assertTrue(SMART_CONTRACT_THROW_MESSAGE in response['message'])
