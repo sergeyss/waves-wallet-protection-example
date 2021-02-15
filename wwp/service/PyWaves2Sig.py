@@ -1,8 +1,5 @@
 import json
-
-import base58
 import pywaves
-import requests
 
 from wwp.service.ConfigService import ConfigService
 from wwp.service.CryptographicService import CryptographicService
