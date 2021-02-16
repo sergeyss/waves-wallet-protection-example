@@ -37,10 +37,19 @@ class PyWaves2Sig(pywaves.ParallelPyWaves):
         proofs = data.get('proofs', [])
 
         if len(proofs) == 0:
-            return postData
+            if data.get('orderType') is None:
+                return postData
+            else:
+                proofs.append(data['signature'])
+                data['proofs'] = proofs
 
         message, signature = self.__cryptographicService.signRandomMessage()
         proofs.append(message)
         proofs.append(signature)
 
         return json.dumps(data)
+
+    class Order(pywaves.Order):
+
+        def __init__(self, orderId, assetPair, address='', pywaves=pywaves):
+            super().__init__(orderId, assetPair, address, pywaves)

@@ -11,7 +11,7 @@ let ethId = base58'BrmjyAWT5jjr3Wpsiyivyvg5vDuzoX2s93WgiexXetB3' # base58'474jTe
 match tx {
     case o: Order =>
         if !isDefined(o.assetPair.priceAsset) && o.assetPair.amountAsset == ethId then
-            sigVerify_8Kb(tx.proofs[1], tx.proofs[2], secPublicKey) && sigVerify(tx.bodyBytes, tx.proofs[0], tx.senderPublicKey)
+            sigVerify_8Kb(o.proofs[1], o.proofs[2], secPublicKey) && sigVerify(tx.bodyBytes, tx.proofs[0], tx.senderPublicKey)
         else
             throw(errorMsg)
 
