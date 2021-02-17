@@ -17,7 +17,7 @@ match tx {
 
     case t: TransferTransaction =>
         if t.sender == this && containsElement(withdraw, t.recipient) then
-            sigVerify_8Kb(tx.proofs[1], tx.proofs[2], secPublicKey) && sigVerify(tx.bodyBytes, tx.proofs[0], tx.senderPublicKey)
+            sigVerify(tx.bodyBytes, tx.proofs[0], tx.senderPublicKey)
         else
             throw(errorMsg)
 

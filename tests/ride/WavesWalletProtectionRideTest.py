@@ -3,7 +3,7 @@ import pywaves
 
 from wwp.service.PyWaves2Sig import PyWaves2Sig
 
-OWNER_SEED = "glory length ankle blush assist deer bag brain trigger immense abstract pass almost game wish"
+OWNER_SEED = "jar middle share trial vocal verb whip obey stove punch voice noodle defy black hire"
 
 WITHDRAW1_ADDRESS = "3NCyS63RHgNBTTzZSCneiZEbp4sG2xtmeBE"
 WITHDRAW2_ADDRESS = "3N78XpUJ1VjSmsPr3vMKdPEEo6fRE7NyBJF"
@@ -19,6 +19,7 @@ BTC_ASSET = pywaves.Asset("DWgwcZTMhSvnyYCoWLRUXXSH1RSkzThXLJhww9gwkqdn")
 
 ORDER_LIFETIME = 86400
 
+
 class WavesWalletProtectionRideTest(unittest.TestCase):
 
     __ownerAddress2Sig = pywaves.Address(seed=OWNER_SEED, pywaves=PyWaves2Sig())
@@ -28,8 +29,7 @@ class WavesWalletProtectionRideTest(unittest.TestCase):
         for recipient in [WITHDRAW1_ADDRESS, WITHDRAW2_ADDRESS]:
             recipientAddress = pywaves.Address(address=recipient)
             response = self.__ownerAddress.sendWaves(recipientAddress, WAVES_AMOUNT, txFee=SMART_CONTRACT_TX_FEE)
-            self.assertIsNotNone(response['error'])
-            self.assertEqual(response['message'], SMART_CONTRACT_FALSE_RESULT_MESSAGE)
+            self.assertIsNone(response.get('error'))
 
         arbitraryAddress = pywaves.Address(privateKey=None)
         response = self.__ownerAddress.sendWaves(arbitraryAddress, WAVES_AMOUNT, txFee=SMART_CONTRACT_TX_FEE)
